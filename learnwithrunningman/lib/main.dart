@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'episode_data.dart';
-import 'instruction.dart';
 import 'grammar_data.dart';
 
 void main() {
@@ -37,14 +36,14 @@ class _HomePageState extends State<HomePage> {
   int _episodeIndex = 0;
   int _grammarIndex = 0;
   bool _isGrammarMode = false;
-
+  bool _isGrammarInit = true;
   final Map<String, Map<String, Widget>> _episodes = episodeData;
   final Map<String, Widget> _grammars = grammarData;
   void _onBottomNavTapped(int index) {
     setState(() {
       _mainPageIndex = index;
       _initPage = false;
-      if (index == 3) { // Grammar tab
+      if (index == 2) {
         _isGrammarMode = true;
       } else {
         _isGrammarMode = false;
@@ -55,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   void _onSidebarTapped(String title) {
     setState(() {
       if (_isGrammarMode) {
+        _isGrammarInit = false;
         _grammarIndex = _grammars.keys.toList().indexOf(title);
       } else {
         _episodeIndex = _episodes.keys.toList().indexOf(title);
@@ -63,86 +63,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _showSettingsDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Settings'),
-          content: const Text('Settings options will go here'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showFeedbackDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Feedback'),
-          content: const Text('Feedback form will go here'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showSubscribeDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Subscribe'),
-          content: const Text('Subscription options will go here'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _getCurrentPage() {
-    if (_isGrammarMode) {
-      return _grammars.values.elementAt(_grammarIndex);
-    }
-    
     final episodeTitle = _episodes.keys.elementAt(_episodeIndex);
     final episodeData = _episodes[episodeTitle]!;
-    if (_initPage) {
-      return const InstructionPage();
+    if (_isGrammarMode) {
+      if(_isGrammarInit) return episodeData['grammar']!;
+      return _grammars.values.elementAt(_grammarIndex);
     }
-    switch (_mainPageIndex) {
-      case 0:
-        return episodeData['map']!;
-      case 1:
-        return episodeData['episode']!;
-      case 2:
-        return episodeData['dictionary']!;
-      default:
-        return const InstructionPage();
-    }
+    if (_initPage) return episodeData['episode']!;
+    return episodeData.values.elementAt(_mainPageIndex);
   }
 
   @override
@@ -170,35 +99,6 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white,
                         fontSize: 24,
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.settings, color: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _showSettingsDialog();
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.feedback, color: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _showFeedbackDialog();
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.subscriptions, color: Colors.white),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            _showSubscribeDialog();
-                          },
-                        ),
-                      ],
                     ),
                   ),
                 ],
@@ -229,19 +129,15 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.tv),
             label: 'Episodes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Dictionary',
+            icon: Icon(Icons.notes),
+            label: 'Vocabs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.book),
             label: 'Grammar',
           ),
         ],
@@ -249,6 +145,6 @@ class _HomePageState extends State<HomePage> {
         onTap: _onBottomNavTapped,
         type: BottomNavigationBarType.fixed,
       ),
-    );
+    );    
   }
 }

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'episodes/episodes.dart' as episodes;
-import 'maps/maps.dart' as maps; 
-import 'dictionaries/dictionaries.dart' as dict;
-import 'instruction.dart';
+import 'vocabs/vocabs.dart' as vocabs;
+import 'instructions/instructions.dart' as instructions;
 final Map<String, Map<String, Widget>> episodeData = {
-  'Instruction': {
-    'map': InstructionPage(),
-    'episode': InstructionPage(),
-    'dictionary': InstructionPage(),
+  '使用教學': {
+    'episode': instructions.InstructionEpisodes(),
+    'vocabs': instructions.InstructionVocabs(),
+    'grammar': instructions.InstructionGrammar(),
   },
   '20210321': {
-    'map': maps.Episode20210321(),
     'episode': episodes.Episode20210321(),
-    'dictionary': dict.Episode20210321(),
+    'vocabs': vocabs.Episode20210321(),
   },
 }; 
 
