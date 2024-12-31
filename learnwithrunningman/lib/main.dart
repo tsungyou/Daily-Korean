@@ -51,17 +51,69 @@ class _HomePageState extends State<HomePage> {
   // Ad related
   late AdMobService _adMobService;
   BannerAd? _banner;
-  
+  InterstitialAd? _interstitial;
+
+  @override
+  void initState(){
+    super.initState();
+    // Load interstitial ad when app starts
+    _loadInterstitialAd();
+  }
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _adMobService = context.read<AdMobService>();
-    _loadAd();
+    _loadBannerAd();
   }
-
-  void _loadAd() {
+  @override
+  void dispose() {
+    _banner?.dispose();
+    _interstitial?.dispose(); // Dispose interstitial ad
+    super.dispose();
+  }
+  
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: _adMobService.interstitialAdUnitId!,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          print('Interstitial ad loaded');
+          _interstitial = ad;
+        }, 
+        onAdFailedToLoad: (LoadAdError error) {
+          print('Interstitial ad failed to load: $error');
+          _interstitial = null;
+        },
+      ),
+    );
+  }
+  void _showInterstitialAd() {
+    if(_interstitial != null) {
+      _interstitial!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+          print('Ad dismissed');
+          ad.dispose();
+          _loadInterstitialAd(); // load another but not shown yet;
+        },
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          print('Ad failed to show: $error');
+          ad.dispose();
+          _loadInterstitialAd(); 
+        },
+        onAdShowedFullScreenContent: (InterstitialAd ad) {
+          print('Ad showed fullscreen content');
+        },
+      );
+      _interstitial!.show();
+      _interstitial = null;
+    } else {
+      print('Interstitial ad is not ready yet');
+      _loadInterstitialAd(); // Try to load a new ad if none is available
+    }
+  }
+  void _loadBannerAd() {
     _adMobService.initialization.then((value) {
-      if (!mounted) return;
       
       final bannerAd = BannerAd(
         size: AdSize.fullBanner,
@@ -71,7 +123,6 @@ class _HomePageState extends State<HomePage> {
       );
 
       bannerAd.load().then((value) {
-        if (!mounted) return;
         setState(() {
           _banner = bannerAd;
         });
@@ -79,15 +130,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
-  void dispose() {
-    _banner?.dispose();
-    super.dispose();
-  }
-  @override
-  void initState(){
-    super.initState();
-  }
   void _onBottomNavTapped(int index) {
     setState(() {
       _mainPageIndex = index;
@@ -98,7 +140,6 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
   void _onSidebarTapped(String title) {
     setState(() {
       if (_isGrammarMode) {
@@ -153,6 +194,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Running Man'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.play_arrow),
+            onPressed: () {
+              _showInterstitialAd();
+            },
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
