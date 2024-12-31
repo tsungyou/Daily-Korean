@@ -135,14 +135,15 @@ final List<Map<String, String>> translations20210321 = [
   },
 ];
 
-class Episode20210321 extends StatefulWidget {
-  const Episode20210321({super.key});
+class AddPage extends StatefulWidget {
+  final Widget bannerAdWidget;
+  const AddPage({super.key, required this.bannerAdWidget});
 
   @override
-  State<Episode20210321> createState() => _Episode20210321State();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _Episode20210321State extends State<Episode20210321> {
+class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,6 +201,7 @@ class _Episode20210321State extends State<Episode20210321> {
                   );
                 },
               ),
+              widget.bannerAdWidget,
             ],
           ),
         ),

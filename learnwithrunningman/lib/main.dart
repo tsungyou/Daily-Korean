@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:runningman_app/services/ad_mob_service.dart';
 import 'episode_data.dart';
 import 'grammar_data.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
+import 'dart:io' show Platform;
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  final initAdFuture = MobileAds.instance.initialize();
+  final adMobService = AdMobService(initAdFuture);
+  runApp(MultiProvider(
+    providers: [Provider.value(value: adMobService)],
+    child: const KoreanApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class KoreanApp extends StatelessWidget {
+  const KoreanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +47,47 @@ class _HomePageState extends State<HomePage> {
   bool _isGrammarMode = false;
   final Map<String, Map<String, Widget>> _episodes = episodeData;
   final Map<String, Widget> _grammars = grammarData;
+
+  // Ad related
+  late AdMobService _adMobService;
+  BannerAd? _banner;
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _adMobService = context.read<AdMobService>();
+    _loadAd();
+  }
+
+  void _loadAd() {
+    _adMobService.initialization.then((value) {
+      if (!mounted) return;
+      
+      final bannerAd = BannerAd(
+        size: AdSize.fullBanner,
+        adUnitId: _adMobService.bannerAdUnitId!,
+        listener: _adMobService.bannerListener,
+        request: const AdRequest(),
+      );
+
+      bannerAd.load().then((value) {
+        if (!mounted) return;
+        setState(() {
+          _banner = bannerAd;
+        });
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _banner?.dispose();
+    super.dispose();
+  }
+  @override
+  void initState(){
+    super.initState();
+  }
   void _onBottomNavTapped(int index) {
     setState(() {
       _mainPageIndex = index;
@@ -57,14 +108,43 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
+  Widget initPage() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Instruction'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: SizedBox(
+        height: 60,
+        child: AdWidget(ad: _banner!),
+      ),      
+    );
+  }
   Widget _getCurrentPage() {
     final episodeTitle = _episodes.keys.elementAt(_episodeIndex);
     final episodeData = _episodes[episodeTitle]!;
+    Widget mainWidget;
     if (_isGrammarMode) {
-      return _grammars.values.elementAt(_grammarIndex);
+       mainWidget = _grammars.values.elementAt(_grammarIndex);
+    } else {
+      mainWidget = episodeData.values.elementAt(_mainPageIndex);
     }
-    return episodeData.values.elementAt(_mainPageIndex);
+    
+    return Column(
+      children: [
+        Expanded(
+          child: mainWidget,
+        ),
+        if (_banner != null)
+          SizedBox(
+            height: _banner!.size.height.toDouble(),
+            width: _banner!.size.width.toDouble(),
+            child: AdWidget(ad: _banner!),
+          )
+        else 
+          const SizedBox(height: 50)
+      ],
+    );
   }
 
   @override
@@ -97,37 +177,32 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            if (_isGrammarMode)
-              ..._grammars.keys.map((grammarTitle) => ListTile(
-                    title: Text(grammarTitle),
-                    onTap: () {
-                      _onSidebarTapped(grammarTitle);
-                      Navigator.pop(context);
-                    },
-                  ))
-            else
-              ..._episodes.keys.map((episodeTitle) => ListTile(
-                    title: Text(episodeTitle),
-                    onTap: () {
-                      _onSidebarTapped(episodeTitle);
-                      Navigator.pop(context);
-                    },
-                  )),
+            ..._grammars.keys.map((grammarTitle) => ListTile(
+              title: Text(grammarTitle),
+              onTap: () {
+                _onSidebarTapped(grammarTitle);
+                Navigator.pop(context);
+              },
+            ))
           ],
         ),
       ),
-      body: Center(
-        child: _getCurrentPage(),
+      body: Column(
+        children: [
+          Expanded(
+            child: _getCurrentPage()
+          )
+        ]
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.tv),
-            label: 'Episodes',
+            label: 'Posts',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notes),
-            label: 'Vocabs',
+            label: 'Nothing',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
