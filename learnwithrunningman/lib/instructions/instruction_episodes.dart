@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:runningman_app/models/models.dart' as models;
 import 'package:runningman_app/widgets/widgets.dart' as widgets;
 
 class InstructionEpisodes extends StatelessWidget {
@@ -18,17 +17,6 @@ class InstructionEpisodes extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
-              models.MultilineDescription(paragraphs: [
-                '此app是提供給會40以及',
-                '1. 不知道怎麼自學韓文',
-                '2. 想透過런닝맨學韓文的人',
-                '3. 想沒有壓力的學習韓文',
-                '4. 平常沒有額外精力每天花時間學習的人',
-                '5. 正在學習韓文，把app當作工具書',
-                '所以設計會以自學、整合為原則,使用者可以每天花幾分鐘時間閱讀任意章節，達到作者認為學語言比起每天死背更重要的事情:',
-                '「讓語言成為生活的一部分!」',
-              ]),
               const SizedBox(height: 16),
               widgets.buildFeatureSection(
                 icon: Icons.tv,

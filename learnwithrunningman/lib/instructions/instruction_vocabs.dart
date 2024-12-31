@@ -18,7 +18,7 @@ class InstructionVocabs extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 16),
-              models.MultilineDescription(paragraphs: [
+              const models.MultilineDescription(paragraphs: [
                 '此app是提供給會40以及',
                 '1. 不知道怎麼自學韓文',
                 '2. 想透過런닝맨學韓文的人',

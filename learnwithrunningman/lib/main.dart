@@ -32,17 +32,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _mainPageIndex = 0;
-  bool _initPage = true;
   int _episodeIndex = 0;
   int _grammarIndex = 0;
   bool _isGrammarMode = false;
-  bool _isGrammarInit = true;
   final Map<String, Map<String, Widget>> _episodes = episodeData;
   final Map<String, Widget> _grammars = grammarData;
   void _onBottomNavTapped(int index) {
     setState(() {
       _mainPageIndex = index;
-      _initPage = false;
       if (index == 2) {
         _isGrammarMode = true;
       } else {
@@ -54,12 +51,10 @@ class _HomePageState extends State<HomePage> {
   void _onSidebarTapped(String title) {
     setState(() {
       if (_isGrammarMode) {
-        _isGrammarInit = false;
         _grammarIndex = _grammars.keys.toList().indexOf(title);
       } else {
         _episodeIndex = _episodes.keys.toList().indexOf(title);
       }
-      _initPage = false;
     });
   }
 
@@ -67,10 +62,8 @@ class _HomePageState extends State<HomePage> {
     final episodeTitle = _episodes.keys.elementAt(_episodeIndex);
     final episodeData = _episodes[episodeTitle]!;
     if (_isGrammarMode) {
-      if(_isGrammarInit) return episodeData['grammar']!;
       return _grammars.values.elementAt(_grammarIndex);
     }
-    if (_initPage) return episodeData['episode']!;
     return episodeData.values.elementAt(_mainPageIndex);
   }
 
@@ -111,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                       _onSidebarTapped(grammarTitle);
                       Navigator.pop(context);
                     },
-                  )).toList()
+                  ))
             else
               ..._episodes.keys.map((episodeTitle) => ListTile(
                     title: Text(episodeTitle),
@@ -119,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                       _onSidebarTapped(episodeTitle);
                       Navigator.pop(context);
                     },
-                  )).toList(),
+                  )),
           ],
         ),
       ),
