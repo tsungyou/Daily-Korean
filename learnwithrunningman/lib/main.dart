@@ -4,7 +4,6 @@ import 'episode_data.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:runningman_app/main1.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,11 +76,9 @@ class _HomePageState extends State<HomePage> {
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
-          print('Interstitial ad loaded');
           _interstitial = ad;
         }, 
         onAdFailedToLoad: (LoadAdError error) {
-          print('Interstitial ad failed to load: $error');
           _interstitial = null;
         },
       ),
