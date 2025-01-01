@@ -9,6 +9,6 @@ Map<String, Widget> grammarData = {
   '時間': grammar.Grammar5(),
   '主語助詞(이/가 and 은/는)': grammar.Grammar6(),
   '보다(比較)': grammar.Grammar7(),
-  '에서(在)': grammar.Grammar8(),
-  '...에서...까지/...부터...까지(從...到...)': grammar.Grammar9(),
+  '에서(在)': const grammar.Grammar8(),
+  '...에서...까지/...부터...까지(從...到...)': const grammar.Grammar9(),
 };

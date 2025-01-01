@@ -11,8 +11,6 @@ class AdMobService {
 
   String? get bannerAdUnitId {
     // in production
-    print(Platform.isIOS);
-    print(Platform.isAndroid);
     if (kReleaseMode) {
       if (Platform.isIOS) {
         return "ca-app-pub-7527196138005649/9403685097";
@@ -66,12 +64,11 @@ class AdMobService {
   }
 
   final BannerAdListener bannerListener = BannerAdListener(
-    onAdLoaded: (Ad ad) => print("ad Loaded"),
+    onAdLoaded: (Ad ad) => {},
     onAdFailedToLoad: (Ad ad, LoadAdError error) {
       ad.dispose();
-      print("Ad failed to load: $error");
     },
-    onAdOpened: (Ad ad) => print("ad opened"),
-    onAdClosed: (Ad ad) => print("ad closed"),
+    onAdOpened: (Ad ad) => {},
+    onAdClosed: (Ad ad) => {},
   );
 }

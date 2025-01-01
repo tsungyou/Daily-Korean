@@ -4,7 +4,7 @@ import 'episode_data.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'dart:io' show Platform;
+import 'package:runningman_app/main1.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,14 +56,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState(){
     super.initState();
-    // Load interstitial ad when app starts
-    _loadInterstitialAd();
   }
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _adMobService = context.read<AdMobService>();
     _loadBannerAd();
+    _loadInterstitialAd();
   }
   @override
   void dispose() {
@@ -92,23 +91,19 @@ class _HomePageState extends State<HomePage> {
     if(_interstitial != null) {
       _interstitial!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
-          print('Ad dismissed');
           ad.dispose();
           _loadInterstitialAd(); // load another but not shown yet;
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-          print('Ad failed to show: $error');
           ad.dispose();
           _loadInterstitialAd(); 
         },
         onAdShowedFullScreenContent: (InterstitialAd ad) {
-          print('Ad showed fullscreen content');
         },
       );
       _interstitial!.show();
       _interstitial = null;
     } else {
-      print('Interstitial ad is not ready yet');
       _loadInterstitialAd(); // Try to load a new ad if none is available
     }
   }
@@ -226,6 +221,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            if(_isGrammarMode)
             ..._grammars.keys.map((grammarTitle) => ListTile(
               title: Text(grammarTitle),
               onTap: () {

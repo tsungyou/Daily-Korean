@@ -7,8 +7,8 @@ class Grammar1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('動詞後綴')),
 
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
             MultilineDescription(paragraphs: [
