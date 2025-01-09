@@ -27,6 +27,10 @@
                 
     },
     "2" : {
+        "id": 2,
+        "collection": "Naver",
+        "artist": "None",
+        "knowledge": "Vocab",
         "title": "Naver - 網頁用字",
         "caption": [
             "這是「Naver 카페」的搜尋頁面，我們可以學習主要頁面使用的單字，日後在學習也更有效率！",

@@ -23,6 +23,9 @@ dependencies:
   audioplayers: ^6.1.0
   carousel_slider: ^5.0.0
   url_launcher: ^6.3.1
+  smooth_page_indicator: ^1.2.0+3
+  shared_preferences: ^2.3.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -53,3 +56,4 @@ flutter:
     - assets/decorations/
     - assets/images/1/
     - assets/images/2/
+    - assets/onboarding/
