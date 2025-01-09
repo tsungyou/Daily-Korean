@@ -56,15 +56,7 @@ class _PostsState extends State<Posts> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.black,
-        cardColor: Colors.grey[900],
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
-        ),
-      ),
-      home: Scaffold(
+    return Scaffold(
         body: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : RefreshIndicator(
@@ -101,8 +93,7 @@ class _PostsState extends State<Posts> {
                   },
                 ),
               ),
-      ),
-    );
+      );
   }
 
   Widget _postHeader(String title) {

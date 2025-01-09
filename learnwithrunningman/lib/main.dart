@@ -25,12 +25,15 @@ class KoreanApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        cardColor: Colors.grey[900],
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Daily Korean',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
       home: const HomePage(),
     );
   }
@@ -187,7 +190,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             DrawerHeader(
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Colors.black,
+                image: DecorationImage(image: AssetImage('assets/decorations/drawerheader.png')),
               ),
               child: Stack(
                 children: [
@@ -196,7 +200,8 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       _sidebarTitle[_mainPageIndex],
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                         fontSize: 24,
                       ),
                     ),
