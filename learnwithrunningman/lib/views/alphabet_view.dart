@@ -13,6 +13,8 @@ class _AlphabetState extends State<Alphabet> {
   void initState() {
     super.initState();
     final player = AudioPlayer();
+  // await player.play(AssetSource('audio/my-audio.wav'));
+
 
   }
   @override

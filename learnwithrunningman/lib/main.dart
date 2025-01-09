@@ -9,7 +9,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
-// await player.play(AssetSource('audio/my-audio.wav'));
   runApp(MultiProvider(
     providers: [Provider.value(value: adMobService),],
     child: const KoreanApp(),
