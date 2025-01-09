@@ -4,11 +4,14 @@ import 'episode_data.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
+  final player = AudioPlayer();
+// await player.play(AssetSource('audio/my-audio.wav'));
   runApp(MultiProvider(
     providers: [Provider.value(value: adMobService)],
     child: const KoreanApp(),
