@@ -22,6 +22,7 @@ class Post {
       title: json['title'] as String?,
       caption: json['caption'] as String?,
       images: List<String>.from(json['images']),
+      url: json['url'] as String?,
     );
   }
 }
@@ -55,69 +56,84 @@ class _PostsState extends State<Posts> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : RefreshIndicator(
-              onRefresh: _fetchPosts,
-              child: ListView.builder(
-                itemCount: _posts.length,
-                itemBuilder: (context, index) {
-                  final post = _posts[index];
-                  if (post is Post) {
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 4.0,
-                        horizontal: 0.0,
-                      ),
-                      elevation: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (post.title != null) _postHeader(post.title!),
-                          _imageCarousel(post.images),
-                          if (post.title != null && post.caption != null)
-                            _titleAndCaps(post.title!, post.caption!),
-                          ElevatedButton(onPressed: (){_launchURL(post.url);}, child: const Text("TO THE URL")),
-                        ],
-                      ),
-                    );
-                  }
-                },
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        cardColor: Colors.grey[900],
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+      ),
+      home: Scaffold(
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : RefreshIndicator(
+                onRefresh: _fetchPosts,
+                child: ListView.builder(
+                  itemCount: _posts.length,
+                  itemBuilder: (context, index) {
+                    final post = _posts[index];
+                    if (post is Post) {
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 4.0,
+                          horizontal: 0.0,
+                        ),
+                        elevation: 5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (post.title != null) _postHeader(post.title!),
+                            _imageCarousel(post.images),
+                            if (post.title != null && post.caption != null)
+                              _titleAndCaps(post.title!, post.caption!),
+                            ElevatedButton(
+                                onPressed: () {
+                                  _launchURL(post.url ?? '');
+                                },
+                                child: const Text("TO THE URL")),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
               ),
-            ),
+      ),
     );
   }
 
   Widget _postHeader(String title) {
-return Container(
-    padding: const EdgeInsets.all(12.0),
-    decoration: BoxDecoration(
-      color: const Color.fromARGB(255, 196, 208, 229), // Background color added
-      borderRadius: BorderRadius.circular(10.0), // Rounded corners for style
-    ),
-    child: Row(
-      children: [
-        const Icon(
-          Icons.article, // Added an icon for style
-          color: Colors.white,
-        ),
-        const SizedBox(width: 8),
-        Expanded( // Expanded to ensure text doesn't overflow
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Colors.white, // Adjusted text color for visibility
-            ),
-            overflow: TextOverflow.ellipsis, // Prevents overflow issues
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[800],
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.article,
+            color: Colors.white,
           ),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.white,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _imageCarousel(List<String> images) {
     return StatefulBuilder(
@@ -142,11 +158,10 @@ return Container(
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(imageUrl),
-                      fit: BoxFit.contain, // Ensures image covers entire area
-                    ),
+                  color: Colors.grey, // Grey background for blank areas
+                  child: Image.asset(
+                    imageUrl,
+                    fit: BoxFit.contain, // Prevent cropping, show full image
                   ),
                 );
               }).toList(),
@@ -155,7 +170,7 @@ return Container(
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.black54,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
@@ -180,7 +195,7 @@ return Container(
       ),
       child: RichText(
         text: TextSpan(
-          style: DefaultTextStyle.of(context).style,
+          style: const TextStyle(color: Colors.white),
           children: [
             TextSpan(
               text: title,
@@ -192,11 +207,11 @@ return Container(
       ),
     );
   }
-    void _launchURL(StringUrl) async {
-    final Uri url = Uri.parse(
-      StringUrl);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+
+  void _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       throw 'Could not launch $url';
     }
