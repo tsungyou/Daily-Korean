@@ -6,7 +6,7 @@
         "artist": "New Jeans",
         "knowledge": "Verb, Ending",
         "caption": [
-            "\n Naver是韓國人常用的社群網站，而Naver 카페(咖啡)可以想像成Dcard的功能，也因此對於學習「日常」韓文有極高的用處。",
+            "\n Naver是韓國人常用的社群網站，而Naver 카페(咖啡)可以想像成Dcard的功能，也因此對於學習「日常」韓文有極高的用處(下載教學)。",
             "\n 在搜尋欄可以看到 「원하는 카페, 글을 찾아보세요」這句話，其中\n 1. 원하는 = 원하다(希望，想要的) + 는(文法-句尾) \n 2. 카페是咖啡廳的意思，但因為這個網站叫做「Naver 카페」所以每個貼文就叫做一個카페，就像在推特中每個貼文都叫做tweet一樣。\n 3. 글(文章)+을(文法-句尾) \n 4. 찾다(找)/보다(看)/찾아보다(找看看) => 찾아보세요 = 차자보다 + 세요(文法-請求句尾) \n => 所以加起來就是「請搜尋想要的文章或是카페」",
             "\n 搜尋New Jeans",
             "\n 「뉴진스 New Jeans 코카콜라 신상이 출시 되었습니다」 \n 1. 뉴지스/코카콜라 = NewJeans/CocaCola 這些外來語一念就會知道是什麼意思，難在於怎麼憑空寫出來，比如說是「뉴징스」還是「뉴진스」?\n 2. 신상이 = 신(新) + 상(상품:商品，更簡略的說法) + 이(文法-句尾)\n 3. 출시(出市=>上市)\n 4. 되었습니다 = 原型是되다，出現的意思，加上었(文法-過去式結尾) 습니다(文法-敬語結尾)，所以整句話就是: \n 「NewJeans可口可樂新商品已經上市了」",
@@ -27,13 +27,21 @@
                 
     },
     "2" : {
-        "title": "Naver系列(2)",
-        "caption": ["\n Tutorial to Naver - 1 \n", "\n Tutorial to Naver - 1 \n"],
-        "images": [
-            "assets/images/image_1.png",
-            "assets/images/image_1.png"
+        "title": "Naver - 網頁用字",
+        "caption": [
+            "這是「Naver 카페」的搜尋頁面，我們可以學習主要頁面使用的單字，日後在學習也更有效率！",
+            "\n 1. 전채글: 전채(全體) + 글(文章) = 所有文章 \n 2. 카페명: 카페(這個社群的名稱: Naver 카페) + 명(名/名稱) = 社群名 \n 카페是從英文/法文的「Café」而來，原本的意思是咖啡廳，在韓國也被拿來代稱Naver 카페這類的線上論壇\n 3. 이웃글 = 이웃(鄰居，鄰近的) + 글 = 鄰近的文章，其實是「朋友的貼文」、「你關注的貼文」、「類似的貼文」的意思 \n 4. 중고거래: 중고(中古) + 고래(音似collection => 交易) = 二手交易，想當然就是和「bts」有關的二手商品買賣。\n 5. 검색결과: 檢查結果，也就是搜尋結果。",
+            "\n 1. 거래글 제의: 거래글(交易文) + 제의(提議，建議) = 包含交易相關的文章 \n 2. 정확도순: 정확도(準確度) + 순(順/順序/排序) = 根據準確度/關聯性排序 \n 3. 최신순: 최신(最新) + 순 = 按照最新的排序\n 4. 전체글",
+            "\n 1. 카페홈 \n 2. 이웃 \n 3. 구독 (訂閱, 動詞:구독하다)\n 4. 인기글 \n 5. 내소식: 내(나의的縮寫:我的)\n 6. 채팅 \n 這頁包含很多看過/音譯的單字，可以試著考自己，再往下翻答案！\n \n \n 1. home:首頁; 2. 朋友/關注者; 4. 人氣文章(인기聲音和中文一樣); 5. 我的消息; 6. 聊天"
+
         ],
-        "url": "https://cafe.naver.com/lighthousetour?iframe_url=%2FArticleRead.nhn%3Fclubid%3D30109144%26articleid%3D37306%26art%3DaW50ZXJuYWwtY2FmZS13ZWItc2VjdGlvbi1zZWFyY2gtbGlzdA.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYWZlVHlwZSI6IkNBRkVfVVJMIiwiYXJ0aWNsZUlkIjozNzMwNiwiY2FmZVVybCI6ImxpZ2h0aG91c2V0b3VyIiwiaXNzdWVkQXQiOjE3MzYzOTQyOTQ1OTZ9.w-dSqCIyPn1MmbeiErszSgqVokCO14I8NpSKBpppNwU%26query%3Dnew%2520jeans"
+        "images": [
+            "assets/images/2/image_1.png",
+            "assets/images/2/image_2.png",
+            "assets/images/2/image_3.png",
+            "assets/images/2/image_4.png"
+        ],
+        "url": "https://section.cafe.naver.com/ca-fe/home/search/articles?q=bts&t=1736459868291"
 
     }
 }

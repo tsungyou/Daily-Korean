@@ -11,10 +11,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
-  await Firebase.initializeApp();
 // await player.play(AssetSource('audio/my-audio.wav'));
   runApp(MultiProvider(
-    providers: [Provider.value(value: adMobService)],
+    providers: [Provider.value(value: adMobService),],
     child: const KoreanApp(),
   ));
 }
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
   int _mainPageIndex = 0;
   int _grammarIndex = 0;
   final Map<String, Widget> _grammars = grammarData;
-  final List<String> _sidebarTitle = ["貼文", "分類", "文法", "聊天"];
+  final List<String> _sidebarTitle = ["貼文", "測驗", "文法", "聊天"];
   // Ad related
   late AdMobService _adMobService;
   BannerAd? _banner;
@@ -144,7 +143,7 @@ class _HomePageState extends State<HomePage> {
       mainWidget = const views.Posts();
     } 
     else if (_mainPageIndex == 1) {
-      mainWidget = const views.CategoriedPosts();
+      mainWidget = const views.QuizView();
     }
     else if (_mainPageIndex == 2) {
       mainWidget = _grammars.values.elementAt(_grammarIndex);
@@ -236,7 +235,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notes),
-            label: '分類',
+            label: '測驗',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
