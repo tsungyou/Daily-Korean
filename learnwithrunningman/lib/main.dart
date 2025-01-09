@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
 import 'package:runningman_app/views/alphabet_view.dart';
@@ -6,10 +7,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:runningman_app/views/views.dart' as views;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
+  await Firebase.initializeApp();
 // await player.play(AssetSource('audio/my-audio.wav'));
   runApp(MultiProvider(
     providers: [Provider.value(value: adMobService)],
