@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
-import 'episode_data.dart';
+import 'package:runningman_app/views/alphabet_view.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:runningman_app/views/views.dart' as views;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class KoreanApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Running Man App',
+      title: 'Daily Korean',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -44,12 +45,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _mainPageIndex = 0;
-  int _episodeIndex = 0;
   int _grammarIndex = 0;
-  bool _isGrammarMode = false;
-  final Map<String, Map<String, Widget>> _episodes = episodeData;
   final Map<String, Widget> _grammars = grammarData;
-
+  final List<String> _sidebarTitle = ["貼文", "分類", "文法", "聊天"];
   // Ad related
   late AdMobService _adMobService;
   BannerAd? _banner;
@@ -128,44 +126,29 @@ class _HomePageState extends State<HomePage> {
   void _onBottomNavTapped(int index) {
     setState(() {
       _mainPageIndex = index;
-      if (index == 2) {
-        _isGrammarMode = true;
-      } else {
-        _isGrammarMode = false;
-      }
     });
   }
   void _onSidebarTapped(String title) {
     setState(() {
-      if (_isGrammarMode) {
+      if (_mainPageIndex == 2) {
         _grammarIndex = _grammars.keys.toList().indexOf(title);
-      } else {
-        _episodeIndex = _episodes.keys.toList().indexOf(title);
       }
     });
   }
-  Widget initPage() {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Instruction'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: SizedBox(
-        height: 60,
-        child: AdWidget(ad: _banner!),
-      ),      
-    );
-  }
   Widget _getCurrentPage() {
-    final episodeTitle = _episodes.keys.elementAt(_episodeIndex);
-    final episodeData = _episodes[episodeTitle]!;
     Widget mainWidget;
-    if (_isGrammarMode) {
-       mainWidget = _grammars.values.elementAt(_grammarIndex);
-    } else {
-      mainWidget = episodeData.values.elementAt(_mainPageIndex);
+    if(_mainPageIndex == 0) {
+      mainWidget = const views.Posts();
+    } 
+    else if (_mainPageIndex == 1) {
+      mainWidget = const views.CategoriedPosts();
     }
-    
+    else if (_mainPageIndex == 2) {
+      mainWidget = _grammars.values.elementAt(_grammarIndex);
+    }
+    else {
+      mainWidget = const views.Chat();
+    }
     return Column(
       children: [
         Expanded(
@@ -187,7 +170,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Running Man'),
+        title: const Text('Daily Korean'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
           IconButton(
@@ -211,17 +194,18 @@ class _HomePageState extends State<HomePage> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      _isGrammarMode ? '文法' : '集數',
+                      _sidebarTitle[_mainPageIndex],
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                       ),
                     ),
                   ),
+                  _alphabetWidget(),
                 ],
               ),
             ),
-            if(_isGrammarMode)
+            if(_mainPageIndex == 2)
             ..._grammars.keys.map((grammarTitle) => ListTile(
               title: Text(grammarTitle),
               onTap: () {
@@ -243,15 +227,19 @@ class _HomePageState extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.tv),
-            label: 'Posts',
+            label: '貼文',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notes),
-            label: 'Nothing',
+            label: '分類',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'Grammar',
+            label: '基礎文法',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: '聊天',
           ),
         ],
         currentIndex: _mainPageIndex,
@@ -259,5 +247,35 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
       ),
     );    
+  }
+  Widget _alphabetWidget() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(Colors.white),
+          foregroundColor: WidgetStateProperty.all(Colors.blue),
+          elevation: WidgetStateProperty.all(2),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 12)
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            )
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Alphabet()));
+        },
+        child: const Text(
+          "40音",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          ),
+        )
+      ),
+    );
   }
 }
