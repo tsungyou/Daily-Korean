@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Alphabet extends StatefulWidget {
   const Alphabet({super.key});
@@ -8,6 +9,12 @@ class Alphabet extends StatefulWidget {
 }
 
 class _AlphabetState extends State<Alphabet> {
+  @override
+  void initState() {
+    super.initState();
+    final player = AudioPlayer();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

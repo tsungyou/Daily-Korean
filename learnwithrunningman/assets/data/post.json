@@ -1,7 +1,18 @@
 {
     "1" : {
-        "title": "Naver - 1",
-        "caption": "\n Tutorial to Naver - 1 \n",
+        "title": "Naver - New Jeans(1)",
+        "id": 1,
+        "collection": "Naver",
+        "artist": "New Jeans",
+        "knowledge": "Verb, Ending",
+        "caption": [
+            "\n Naver是韓國人常用的社群網站，而Naver 카페(咖啡)可以想像成Dcard的功能，也因此對於學習「日常」韓文有極高的用處。",
+            "\n 在搜尋欄可以看到 「원하는 카페, 글을 찾아보세요」這句話，其中\n 1. 원하는 = 원하다(希望，想要的) + 는(文法-句尾) \n 2. 카페是咖啡廳的意思，但因為這個網站叫做「Naver 카페」所以每個貼文就叫做一個카페，就像在推特中每個貼文都叫做tweet一樣。\n 3. 글(文章)+을(文法-句尾) \n 4. 찾다(找)/보다(看)/찾아보다(找看看) => 찾아보세요 = 차자보다 + 세요(文法-請求句尾) \n => 所以加起來就是「請搜尋想要的文章或是카페」",
+            "\n 搜尋New Jeans",
+            "\n 「뉴진스 New Jeans 코카콜라 신상이 출시 되었습니다」 \n 1. 뉴지스/코카콜라 = NewJeans/CocaCola 這些外來語一念就會知道是什麼意思，難在於怎麼憑空寫出來，比如說是「뉴징스」還是「뉴진스」?\n 2. 신상이 = 신(新) + 상(상품:商品，更簡略的說法) + 이(文法-句尾)\n 3. 출시(出市=>上市)\n 4. 되었습니다 = 原型是되다，出現的意思，加上었(文法-過去式結尾) 습니다(文法-敬語結尾)，所以整句話就是: \n 「NewJeans可口可樂新商品已經上市了」",
+            "\n 뉴진스 느낌이 나진 않네요 ㅠㅠ \n 1. 느낌이: 느끼다是「感覺」的動詞，名詞的變化則是느낌(..的感覺) \n 2. 나진 않네요 = 나다(發生);「(動詞)지 않나다」 是否定的意思; 네요則是比較溫和的句尾(文法-句尾)",
+            "\n 123123123"
+        ],
         "images": [
             "assets/images/image_1.png",
             "assets/images/image_2.png",
@@ -10,13 +21,18 @@
             "assets/images/image_5.png",
             "assets/images/image_6.png"
         ],
+        "test": {
+            "vocab": ["원하다", "카페", "글", "찾아보다", ""],
+            "grammar": []
+        },
         "url": "https://cafe.naver.com/lighthousetour?iframe_url=%2FArticleRead.nhn%3Fclubid%3D30109144%26articleid%3D37306%26art%3DaW50ZXJuYWwtY2FmZS13ZWItc2VjdGlvbi1zZWFyY2gtbGlzdA.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYWZlVHlwZSI6IkNBRkVfVVJMIiwiYXJ0aWNsZUlkIjozNzMwNiwiY2FmZVVybCI6ImxpZ2h0aG91c2V0b3VyIiwiaXNzdWVkQXQiOjE3MzYzOTQyOTQ1OTZ9.w-dSqCIyPn1MmbeiErszSgqVokCO14I8NpSKBpppNwU%26query%3Dnew%2520jeans"
                 
     },
     "2" : {
-        "title": "Naver - 1",
-        "caption": "\n Tutorial to Naver - 1 \n",
+        "title": "Naver系列(2)",
+        "caption": ["\n Tutorial to Naver - 1 \n", "\n Tutorial to Naver - 1 \n"],
         "images": [
+            "assets/images/image_1.png",
             "assets/images/image_1.png"
         ],
         "url": "https://cafe.naver.com/lighthousetour?iframe_url=%2FArticleRead.nhn%3Fclubid%3D30109144%26articleid%3D37306%26art%3DaW50ZXJuYWwtY2FmZS13ZWItc2VjdGlvbi1zZWFyY2gtbGlzdA.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYWZlVHlwZSI6IkNBRkVfVVJMIiwiYXJ0aWNsZUlkIjozNzMwNiwiY2FmZVVybCI6ImxpZ2h0aG91c2V0b3VyIiwiaXNzdWVkQXQiOjE3MzYzOTQyOTQ1OTZ9.w-dSqCIyPn1MmbeiErszSgqVokCO14I8NpSKBpppNwU%26query%3Dnew%2520jeans"
