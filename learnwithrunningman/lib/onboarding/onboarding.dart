@@ -79,15 +79,13 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
                 child: const Text(
-                  "Next",
+                  "下一頁",
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               )
             else
               ElevatedButton(
-                onPressed: isValidEmail
-                    ? () => _completeOnboarding(context)
-                    : null,
+                onPressed: () {_completeOnboarding(context);},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
@@ -96,7 +94,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
                 child: const Text(
-                  "Get started",
+                  "開始",
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               )
@@ -120,67 +118,27 @@ class _OnboardingViewState extends State<OnboardingView> {
           itemCount: controller.items.length,
           controller: pageController,
           itemBuilder: (context, index) {
-            if (index == controller.items.length - 1) {
-              return Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Enter your email to get started",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.purple,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 30),
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: const TextStyle(color: Colors.purple),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(color: Colors.purple, width: 2),
-                        ),
-                        prefixIcon: const Icon(Icons.email, color: Colors.purple),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) {
-                        setState(() {
-                          isValidEmail = validateEmail(value);
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              );
-            }
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(left: 0.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    controller.items[index].imageUrl,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                  ),
-                  const SizedBox(height: 30),
                   Text(
                     controller.items[index].title,
                     style: const TextStyle(
-                      color: Colors.purple,
-                      fontSize: 32,
+                      color: Colors.black,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 5),
+                  Image.asset(
+                    controller.items[index].imageUrl,
+                    height: MediaQuery.of(context).size.height * 0.7,
+                  ),
+
+                  const SizedBox(height: 5),
                   Text(
                     controller.items[index].description,
                     style: TextStyle(

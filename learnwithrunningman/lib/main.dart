@@ -34,7 +34,8 @@ class KoreanApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Daily Korean',
-      home: showOnboarding ? const OnboardingView() : const HomePage(),
+      // home: showOnboarding ? const OnboardingView() : const HomePage(),
+      home: const OnboardingView(),
     );
   }
 }
