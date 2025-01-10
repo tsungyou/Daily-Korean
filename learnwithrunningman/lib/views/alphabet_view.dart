@@ -24,7 +24,7 @@ class _AlphabetState extends State<Alphabet> {
             const Padding(
               padding: EdgeInsets.all(6.0), 
               child: Text(
-                "韓文有40音，其中也像英文一樣包含母音以及子音，但母音和子音的關係比英文更明顯一點。(點擊韓文字可以聽聲音) \n \n子音有他自己的「名字」，但是和實際的發音並不相同，也不需要去記憶，如果好奇可以點開聽聽看，但主要會用和「ㅏ」結合的聲音背，就像日語會用「ka ki ku ke ko」一樣",
+                "韓文有40音，其中也像英文一樣包含母音以及子音，但母音和子音的關係比英文更明顯一點。(點擊韓文字可以聽聲音) \n \n子音的學法要像日語會用「ka ki ku ke ko」一樣，用「子音+母音」的方式記憶，因此點開的聲音會是加上「ㅏ」的聲音。 \n\n 對於學習字母，請不要想全部一次背起來，而是透過單字記憶。",
                 style: TextStyle(fontWeight: FontWeight.bold),
                 ),
             ),
@@ -105,26 +105,26 @@ class _AlphabetState extends State<Alphabet> {
     final List<Map<String, String>> consonants;
     if (index == 1) {
       consonants = [
-        {'symbol': 'ㄱ', 'sound': 'alphabet_audio/ㄱ.wav'},
-        {'symbol': 'ㄴ', 'sound': 'alphabet_audio/ㄴ.wav'},
-        {'symbol': 'ㄷ', 'sound': 'alphabet_audio/ㄷ.wav'},
-        {'symbol': 'ㄹ', 'sound': 'alphabet_audio/ㄹ.wav'},
-        {'symbol': 'ㅁ', 'sound': 'alphabet_audio/ㅁ.wav'},
-        {'symbol': 'ㅂ', 'sound': 'alphabet_audio/ㅂ.wav'},
-        {'symbol': 'ㅇ', 'sound': 'alphabet_audio/ㅇ.wav'},
-        {'symbol': 'ㅈ', 'sound': 'alphabet_audio/ㅈ.wav'},
-        {'symbol': 'ㅊ', 'sound': 'alphabet_audio/ㅊ.wav'},
-        {'symbol': 'ㅋ', 'sound': 'alphabet_audio/ㅋ.wav'},
-        {'symbol': 'ㅌ', 'sound': 'alphabet_audio/ㅌ.wav'},
-        {'symbol': 'ㅍ', 'sound': 'alphabet_audio/ㅍ.wav'},
+        {'symbol': 'ㄱ', 'sound': 'alphabet_audio/ka.wav'},
+        {'symbol': 'ㄴ', 'sound': 'alphabet_audio/나.wav'},
+        {'symbol': 'ㄷ', 'sound': 'alphabet_audio/다.wav'},
+        {'symbol': 'ㄹ', 'sound': 'alphabet_audio/라.wav'},
+        {'symbol': 'ㅁ', 'sound': 'alphabet_audio/마.wav'},
+        {'symbol': 'ㅂ', 'sound': 'alphabet_audio/바.wav'},
+        {'symbol': 'ㅇ', 'sound': 'alphabet_audio/아.wav'},
+        {'symbol': 'ㅈ', 'sound': 'alphabet_audio/자.wav'},
+        {'symbol': 'ㅊ', 'sound': 'alphabet_audio/차.wav'},
+        {'symbol': 'ㅋ', 'sound': 'alphabet_audio/카.wav'},
+        {'symbol': 'ㅌ', 'sound': 'alphabet_audio/타.wav'},
+        {'symbol': 'ㅍ', 'sound': 'alphabet_audio/파.wav'},
       ];
     } else {
       consonants = [
-        {'symbol': 'ㄲ', 'sound': 'alphabet_audio/ㄲ.wav'},
-        {'symbol': 'ㄸ', 'sound': 'alphabet_audio/ㄸ.wav'},
-        {'symbol': 'ㅃ', 'sound': 'alphabet_audio/ㅃ.wav'},
-        {'symbol': 'ㅆ', 'sound': 'alphabet_audio/ㅆ.wav'},
-        {'symbol': 'ㅉ', 'sound': 'alphabet_audio/ㅉ.wav'},
+        {'symbol': 'ㄲ', 'sound': 'alphabet_audio/까.wav'},
+        {'symbol': 'ㄸ', 'sound': 'alphabet_audio/따.wav'},
+        {'symbol': 'ㅃ', 'sound': 'alphabet_audio/빠.wav'},
+        {'symbol': 'ㅆ', 'sound': 'alphabet_audio/싸.wav'},
+        {'symbol': 'ㅉ', 'sound': 'alphabet_audio/짜.wav'},
       ];
     }
     return Column(

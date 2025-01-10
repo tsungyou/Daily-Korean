@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
-import 'package:runningman_app/views/alphabet_view.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
