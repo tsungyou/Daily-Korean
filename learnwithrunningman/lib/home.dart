@@ -21,6 +21,8 @@ class _HomePageState extends State<HomePage> {
   late AdMobService _adMobService;
   BannerAd? _banner;
   InterstitialAd? _interstitial;
+  RewardedAd? _rewarded;
+
 
   @override
   void initState(){
@@ -32,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     _adMobService = context.read<AdMobService>();
     _loadBannerAd();
     _loadInterstitialAd();
+    _loadRewardedAd();
   }
   @override
   void dispose() {
@@ -91,6 +94,43 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: _adMobService.rewardedAdUnitId!, 
+      request: const AdRequest(), 
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (RewardedAd ad) {
+          setState(() {
+            _rewarded = ad;
+          });
+        }, 
+        onAdFailedToLoad: (LoadAdError error){
+          setState(() {
+            _rewarded = null;
+          });
+        }));
+  }
+  void _showRewardedAd() {
+    if(_rewarded != null) {
+      _rewarded!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (RewardedAd ad) {
+          ad.dispose();
+          _loadRewardedAd();
+        },
+        onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+          ad.dispose();
+          _loadRewardedAd();
+        }
+      );
+
+      _rewarded!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+        _increaseCounter(2);
+      });   
+    }
+  }
+  void _increaseCounter(quantity) {
+    print(quantity);
+  }
 
   void _onBottomNavTapped(int index) {
     setState(() {
@@ -134,7 +174,10 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
-
+  Widget _rewardedPrompt() {
+    if(_rewarded == null) { return Container(); }
+    return IconButton(onPressed: _showRewardedAd, icon: const Icon(Icons.read_more));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +191,7 @@ class _HomePageState extends State<HomePage> {
               _showInterstitialAd();
             },
           ),
+          _rewardedPrompt(),
         ],
       ),
       drawer: Drawer(
