@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _mainPageIndex = 0;
   int _grammarIndex = 0;
   final Map<String, Widget> _grammars = grammarData;
-  final List<String> _sidebarTitle = ["貼文", "測驗", "文法", "聊天"];
+  final List<String> _sidebarTitle = ["貼文", "40音", "文法", "聊天"];
   // Ad related
   late AdMobService _adMobService;
   BannerAd? _banner;
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
       mainWidget = const views.Posts();
     } 
     else if (_mainPageIndex == 1) {
-      mainWidget = const views.QuizView();
+      mainWidget = const views.Alphabet();
     }
     else if (_mainPageIndex == 2) {
       mainWidget = _grammars.values.elementAt(_grammarIndex);
@@ -173,7 +173,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  _alphabetWidget(),
                 ],
               ),
             ),
@@ -203,7 +202,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notes),
-            label: '測驗',
+            label: '40音',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
@@ -219,35 +218,5 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
       ),
     );    
-  }
-  Widget _alphabetWidget() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(Colors.white),
-          foregroundColor: WidgetStateProperty.all(Colors.blue),
-          elevation: WidgetStateProperty.all(2),
-          padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 12)
-          ),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-            )
-          ),
-        ),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const Alphabet()));
-        },
-        child: const Text(
-          "40音",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold
-          ),
-        )
-      ),
-    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:runningman_app/onboarding/onboarding_items.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import "package:runningman_app/home.dart";
 
 class OnboardingView extends StatefulWidget {
@@ -26,7 +27,13 @@ class _OnboardingViewState extends State<OnboardingView> {
     emailController.dispose();
     super.dispose();
   }
-
+  Future<void> _completeOnboarding(context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("seenOnboarding", true);
+    Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => const HomePage())
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,8 +86,7 @@ class _OnboardingViewState extends State<OnboardingView> {
             else
               ElevatedButton(
                 onPressed: isValidEmail
-                    ? () => Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => const HomePage()))
+                    ? () => _completeOnboarding(context)
                     : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,

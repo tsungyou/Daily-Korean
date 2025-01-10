@@ -16,7 +16,7 @@ class LatexStyleTable extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Table(
         border: TableBorder.all(
-          color: Colors.black,
+          color: Colors.white,
           width: 1,
           style: BorderStyle.solid,
           borderRadius: BorderRadius.circular(8),

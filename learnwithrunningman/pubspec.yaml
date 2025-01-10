@@ -52,7 +52,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/
-    - assets/alphabet_audios/
+    - assets/alphabet_audio/
     - assets/decorations/
     - assets/images/1/
     - assets/images/2/

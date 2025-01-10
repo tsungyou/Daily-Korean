@@ -45,6 +45,10 @@
             "assets/images/2/image_3.png",
             "assets/images/2/image_4.png"
         ],
+        "test": {
+            "vocab": ["원하다", "카페", "글", "찾아보다", ""],
+            "grammar": []
+        },
         "url": "https://section.cafe.naver.com/ca-fe/home/search/articles?q=bts&t=1736459868291"
 
     }
