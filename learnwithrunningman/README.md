@@ -1,16 +1,21 @@
-# learnwithrunningman
+# LearnWithRunningMan
 
-A new Flutter project.
+## AdMob
+1. https://developers.google.com/admob/ios/privacy/strategies#skadnetwork
 
-## Getting Started
+## Simulator
+1. Reboot
 
-This project is a starting point for a Flutter application.
+https://blog.csdn.net/yao1500/article/details/133608565
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## to do
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+2. Add real time notification
+
+1. Add flutter local notification
+3. rewarded interstitial
+5. in app purchase
+4. firestore
+6. 
