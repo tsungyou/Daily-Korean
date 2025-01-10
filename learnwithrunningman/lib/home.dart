@@ -208,10 +208,10 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.book),
             label: '基礎文法',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: '聊天',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.chat),
+          //   label: '聊天',
+          // ),
         ],
         currentIndex: _mainPageIndex,
         onTap: _onBottomNavTapped,
