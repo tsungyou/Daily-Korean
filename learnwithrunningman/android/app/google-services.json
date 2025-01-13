@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045639215875",
+    "project_id": "dailykorean-61fe7",
+    "storage_bucket": "dailykorean-61fe7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045639215875:android:af8104ed0516d86b788736",
+        "android_client_info": {
+          "package_name": "com.example.learnwithrunningman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4dNTDZGYLEVhSaHkbue_0-083aeF1NFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

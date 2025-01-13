@@ -7,8 +7,8 @@ class Grammar2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('名詞後綴')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
             LatexStyleTable(tableData: '''
@@ -26,25 +26,6 @@ class Grammar2 extends StatelessWidget {
             '''),
             ExampleSentence(number: 1, sentence: '사과예요', hiddenWord: '예요', translation: '蘋果'),
             ExampleSentence(number: 2, sentence: '학생이에요', hiddenWord: '이에요', translation: '學生'),
-            MultilineDescription(paragraphs: [
-              '以下是一段對話練習:',
-            ]),
-            Conversation(
-              lines: [
-                'A: 안녕하세요. 학생이에요?',
-                'B: 아니요, 선생님이에요.',
-                'A: 아, 선생님이세요?',
-                'B: 네, 한국어 선생님이에요.',
-              ],
-            ),
-            Conversation(
-              lines: [
-                'A: 안녕하세요. 학생이에요?',
-                'B: 아니요, 선생님이에요.',
-                'A: 아, 선생님이세요?',
-                'B: 네, 한국어 선생님이에요.',
-              ],
-            ),
           ],
         ),
       ),
