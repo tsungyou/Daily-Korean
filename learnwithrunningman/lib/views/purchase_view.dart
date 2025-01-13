@@ -13,6 +13,7 @@ const List<String> _productIds = <String>[
   "premium_ios",
 ];
 
+
 class _PurchaseViewState extends State<PurchaseView> {
   String? _notice;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
@@ -25,7 +26,6 @@ class _PurchaseViewState extends State<PurchaseView> {
     }
     setState(() {
       _isAvailable = isAvailable;
-      print(_isAvailable);
     });
     if(!_isAvailable) {
       _notice = "There's no upgrade at this time";

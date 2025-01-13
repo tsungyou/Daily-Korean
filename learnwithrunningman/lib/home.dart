@@ -139,13 +139,10 @@ class _HomePageState extends State<HomePage> {
     document.get().then((documentSnapshot) {
       if (documentSnapshot.exists) {
         document.update({"count": FieldValue.increment(1)});
-        print("Incremented count by 1");
       } else {
         document.set({"count": 1});
-        print("Initialized count to 1");
       }
     }).catchError((error) {
-      print("Error updating count: $error");
     });
   }
 
@@ -202,7 +199,24 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Daily Korean'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          
+          FutureBuilder<DocumentSnapshot>(
+            future: FirebaseFirestore.instance
+                .collection("users")
+                .doc(AuthService().currentUser?.uid)
+                // .doc(context.read<AuthService>().currentUser?.uid)
+                .get(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Text("Loading...");
+              }
+              if (!snapshot.hasData || snapshot.data?.data() == null) {
+                return const Text("0");
+              }
+              final data = snapshot.data!.data() as Map<String, dynamic>;
+              int count = data["count"] ?? 0;
+              return Text('$count', style: const TextStyle(fontSize: 18));
+            },
+          ),
           IconButton(
             onPressed: () {setState(() {
               Navigator.push(

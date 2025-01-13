@@ -8,13 +8,8 @@ class AuthService {
   
   Future<User?> getOrCreateUser() async {
     if(currentUser == null) {
-      print("start creating");
       await _firebaseAuth.signInAnonymously();
-      print("start initializing");
       await setDefaultAdValue();
-    } else {
-      print(currentUser);
-      print("nothing started");
     }
   return currentUser;
   }
@@ -33,10 +28,8 @@ class AuthService {
       // .collection('users')
       // .doc(AuthService().currentUser?.uid)
       // .set({"count": 0});
-      print("initialized default value");
     }
     else {
-      print("current user to be null");
     }
   }
 }
