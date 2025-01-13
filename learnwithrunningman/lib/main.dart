@@ -5,10 +5,15 @@ import 'package:runningman_app/services/ad_mob_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // firebase
+  await Firebase.initializeApp();
+  // advertise
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
+  // personal data
   final prefs = await SharedPreferences.getInstance();
   final bool hasSeenOnboarding = prefs.getBool('seenOnboarding') ?? false;
 
@@ -34,8 +39,8 @@ class KoreanApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Daily Korean',
-      // home: showOnboarding ? const OnboardingView() : const HomePage(),
-      home: const OnboardingView(),
+      home: showOnboarding ? const OnboardingView() : const HomePage(),
+      // home: const OnboardingView(),
     );
   }
 }

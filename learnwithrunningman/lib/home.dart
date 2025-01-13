@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
+import 'package:runningman_app/views/purchase_view.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _purchasePage = false;
   int _mainPageIndex = 0;
   int _grammarIndex = 0;
   final Map<String, Widget> _grammars = grammarData;
@@ -129,7 +131,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
   void _increaseCounter(quantity) {
-    print(quantity);
   }
 
   void _onBottomNavTapped(int index) {
@@ -186,6 +187,16 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
           IconButton(
+            onPressed: () {setState(() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PurchaseView(),
+                  ),
+                );
+            });}, 
+            icon: const Icon(Icons.shopping_bag)),
+          IconButton(
             icon: const Icon(Icons.play_arrow),
             onPressed: () {
               _showInterstitialAd();
@@ -233,7 +244,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Expanded(
-            child: _getCurrentPage()
+            child: _getCurrentPage(),
           )
         ]
       ),
