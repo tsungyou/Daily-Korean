@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:runningman_app/home.dart';
 import 'package:runningman_app/onboarding/onboarding.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
+import 'package:runningman_app/services/auth_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // firebase
   await Firebase.initializeApp();
+  AuthService().getOrCreateUser();
   // advertise
   final initAdFuture = MobileAds.instance.initialize();
   final adMobService = AdMobService(initAdFuture);
@@ -40,7 +42,6 @@ class KoreanApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Daily Korean',
       home: showOnboarding ? const OnboardingView() : const HomePage(),
-      // home: const OnboardingView(),
     );
   }
 }

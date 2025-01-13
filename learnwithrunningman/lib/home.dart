@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
+import 'package:runningman_app/services/auth_service.dart';
 import 'package:runningman_app/views/purchase_view.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -130,6 +132,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
   void _increaseCounter(quantity) {
+    DocumentReference document = FirebaseFirestore.instance
+        .collection("users")
+        .doc(AuthService().currentUser?.uid);
+
+    document.get().then((documentSnapshot) {
+      if (documentSnapshot.exists) {
+        document.update({"count": FieldValue.increment(1)});
+        print("Incremented count by 1");
+      } else {
+        document.set({"count": 1});
+        print("Initialized count to 1");
+      }
+    }).catchError((error) {
+      print("Error updating count: $error");
+    });
   }
 
   void _onBottomNavTapped(int index) {
@@ -185,6 +202,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Daily Korean'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          
           IconButton(
             onPressed: () {setState(() {
               Navigator.push(
