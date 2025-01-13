@@ -225,5 +225,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>NSLocalNotificationUsageDescription</key>
+	<string>Allow notifications for updates and reminders.</string>
 </dict>
 </plist>

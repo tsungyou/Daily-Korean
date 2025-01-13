@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:runningman_app/services/ad_mob_service.dart';
 import 'package:runningman_app/services/auth_service.dart';
+import 'package:runningman_app/services/notification_service.dart';
 import 'package:runningman_app/views/purchase_view.dart';
 import 'grammar_data.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _mainPageIndex = 0;
   int _grammarIndex = 0;
+  final notificationService = NotificationService();
   final Map<String, Widget> _grammars = grammarData;
   final List<String> _sidebarTitle = ["貼文", "40音", "文法", "聊天"];
   // Ad related
@@ -199,6 +201,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Daily Korean'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          IconButton(onPressed: () {notificationService.showNotification(title: "Sample title", body: "It works!");}, icon: const Icon(Icons.abc),),
           FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
                 .collection("users")
