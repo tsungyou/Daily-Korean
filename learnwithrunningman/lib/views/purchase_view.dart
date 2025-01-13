@@ -13,7 +13,6 @@ const List<String> _productIds = <String>[
   "premium_ios",
 ];
 
-
 class _PurchaseViewState extends State<PurchaseView> {
   String? _notice;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
@@ -22,7 +21,6 @@ class _PurchaseViewState extends State<PurchaseView> {
   Future<void> initStoreInfo() async {
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
-      print('In-app purchases are not available on this device.');
       return;
     }
     setState(() {
@@ -40,8 +38,6 @@ class _PurchaseViewState extends State<PurchaseView> {
   
     setState(() {
       _products = productDetailsResponse.productDetails;
-      print(_products);
-      print("not found products: ${productDetailsResponse.notFoundIDs}");
     });
 
     if(productDetailsResponse.error != null) {

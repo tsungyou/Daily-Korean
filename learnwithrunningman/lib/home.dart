@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _purchasePage = false;
   int _mainPageIndex = 0;
   int _grammarIndex = 0;
   final Map<String, Widget> _grammars = grammarData;
@@ -262,10 +261,6 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.book),
             label: '基礎文法',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.chat),
-          //   label: '聊天',
-          // ),
         ],
         currentIndex: _mainPageIndex,
         onTap: _onBottomNavTapped,
